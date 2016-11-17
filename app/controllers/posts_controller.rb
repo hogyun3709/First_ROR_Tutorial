@@ -43,7 +43,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to [@post.bulletin,@post], notice: 'Post was successfully updated.' }
+        format.html { redirect_to [@post.bulletin, @post], notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -65,9 +65,10 @@ class PostsController < ApplicationController
   private
     def set_bulletin
       @bulletin = Bulletin.find(params[:bulletin_id])
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = @bulletin.posts.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
